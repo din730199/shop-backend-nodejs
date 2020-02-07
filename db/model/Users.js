@@ -41,7 +41,6 @@ const UserSchema = new mongoose.Schema({
     },
     avarta : {
         type : 'String',
-        default:'/uploads/avatar-default.png'
     },
     bankNumber : {
         type : 'String',
