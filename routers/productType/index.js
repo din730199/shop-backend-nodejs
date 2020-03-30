@@ -50,7 +50,7 @@ router.post('/addProductType',upload.single('image'),async(req,res)=>{
         console.log(error)
         res.json({
             errors: [{
-                msg: 'Sign up error !'
+                msg: 'Server error !'
             }],
             status: 205
         });
