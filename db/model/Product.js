@@ -4,12 +4,12 @@ const Product = new mongoose.Schema({
     name:{
         type: 'String'
     },
-    image:{
+    image:[{
         type:'String'
-    },
+    }],
     productType:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'producttype'
+        ref: 'productType'
     },
     price:{
         type : 'Number'
