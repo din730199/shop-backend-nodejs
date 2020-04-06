@@ -59,7 +59,7 @@ router.post('/addProduct', upload.array('images', 10),async(req,res)=>{
         console.log(error)
         res.json({
             errors: [{
-                msg: 'Server error !'
+                msg: 'Server error !!'
             }],
             status: 205
         });
