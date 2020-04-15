@@ -14,6 +14,12 @@ const UserSchema = new mongoose.Schema({
         type : 'String',
         required : true
     },
+    address : {
+        type : 'String'
+    },
+    numberphone : {
+        type : 'String'
+    },
     dateCreate : {
         type : 'Date',
         default : new Date()

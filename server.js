@@ -14,6 +14,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/users',require('./routers/users/index'));
 app.use('/api/productType',require('./routers/productType/index'));
 app.use('/api/product',require('./routers/product/index'));
+app.use('/api/bill',require('./routers/bill/index'));
 
 app.get('/',(req,res) => {
     res.send("Welcome")
