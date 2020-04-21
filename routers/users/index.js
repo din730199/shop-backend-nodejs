@@ -29,9 +29,7 @@ router.post('/signUp', async (req, res) => {
                 data: {
                     id: check.id,
                 }
-            }, config.get('privateKey'), {
-                expiresIn: '24h'
-            }, (err, token) => {
+            }, config.get('privateKey'), (err, token) => {
                 if (err) throw err;
                 console.log(token);
                 if (!token) {
@@ -81,9 +79,7 @@ router.post('/signIn', async (req, res) => {
                     data: {
                         id: CheckUser.id,
                     }
-                }, config.get('privateKey'), {
-                    expiresIn: '24h'
-                }, (err, token) => {
+                }, config.get('privateKey'), (err, token) => {
                     if (err) throw err;
                     console.log(token);
                     if (token) {
