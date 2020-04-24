@@ -94,4 +94,60 @@ router.get('/getProductByType', async(req,res)=>{
     }
 });
 
+router.get('/searchByKeyword', async (req,res) => {
+    try {
+        let {keyword} = req.query;
+        let docOrigin = await ProductModel.find()
+        .populate('productType', 'name'); 
+        
+
+        if(keyword) {
+            let doc = docOrigin.filter((value,index) => {
+            let line = value.name + value.productType.name;
+
+            let l =  change_alias(line)
+            let k =  change_alias(keyword)
+
+            if(l.toLowerCase().indexOf(k.toLowerCase()) != -1)
+            {
+                return value;
+            }
+        })
+    
+            res.json({
+                doc
+            })
+        } else {
+            res.json({
+                doc : docOrigin
+            })
+        }
+
+    } catch (error) {
+        console.log(error)
+        res.json({
+            errors: [{
+                msg: "Server errors"
+            }],
+            status: 205
+        })
+    }
+})
+
+function change_alias(alias) {
+    var str = alias;
+    str = str.toLowerCase();
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+    str = str.replace(/đ/g,"d");
+    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
+    str = str.replace(/ + /g," ");
+    str = str.trim(); 
+    return str;
+}
+
 module.exports = router;
