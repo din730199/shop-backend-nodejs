@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const BillModel = require('../../db/model/Bill');
+const BillDetailModel = require('../../db/model/BillDetail');
 const auth = require('../../core/auth')
 
 router.post('/addBill',auth,async(req,res)=>{
@@ -16,7 +17,15 @@ router.post('/addBill',auth,async(req,res)=>{
         })
 
         let check = await data.save()
-        console.log(check);
+        console.log(check._id);
+        arr.forEach(async e => {
+            const data2 = new BillDetailModel({
+                idBill:check._id,
+                idProduct:e.id,
+                quantity:e.quantity
+            })
+            await data2.save()
+        });
 
         if(check){
             res.json({
