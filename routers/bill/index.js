@@ -5,7 +5,11 @@ const auth = require('../../core/auth')
 
 router.post('/addBill',auth,async(req,res)=>{
     try {
-        let{total} = req.body;
+        let{total,arr} = req.body;
+
+        console.log(total);
+        console.log('123');
+        console.log(arr);
 
         const data = new BillModel({
             idUser:req.id,
