@@ -8,7 +8,6 @@ router.post('/addBill',auth,async(req,res)=>{
         let{total,arr} = req.body;
 
         console.log(total);
-        console.log('123');
         console.log(arr);
 
         const data = new BillModel({
@@ -17,6 +16,8 @@ router.post('/addBill',auth,async(req,res)=>{
         })
 
         let check = await data.save()
+        console.log(check);
+
         if(check){
             res.json({
                 msg:'Thêm thành công',
