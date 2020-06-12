@@ -9,7 +9,7 @@ server.listen(PORT)
 
 connectDB();
 app.use(body_parser.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.use('/api/users',require('./routers/users/index'));
 app.use('/api/productType',require('./routers/productType/index'));
