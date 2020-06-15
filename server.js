@@ -28,9 +28,9 @@ io.on('connection', socket =>{
             }
         })
     
-            io.emit('searchresult',{doc:doc})
+            io.emit('search',{doc:doc})
         } else {
-            io.emit('searchresult',{doc:docOrigin})
+            io.emit('search',{doc:docOrigin})
         }
     })
 })
