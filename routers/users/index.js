@@ -5,6 +5,10 @@ const config = require('config')
 const jwt = require('jsonwebtoken');
 const auth = require('../../core/auth')
 const UsersModel = require('../../db/model/Users')
+const {
+    check,
+    validationResult
+} = require('express-validator');
 
 router.post('/signUp', async (req, res) => {
     try {
@@ -59,7 +63,19 @@ router.post('/signUp', async (req, res) => {
     }
 });
 
-router.post('/signIn', async (req, res) => {
+router.post('/signIn',[
+    check('email','Không được để trống').not().isEmpty(),
+    check('email','Sai định dạng email').isEmail(),
+    check('password','Không được để trống').not().isEmpty(),
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array(),
+            status: 201
+        });
+    }
+
     try {
         let {
             email,
