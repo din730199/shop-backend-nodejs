@@ -10,7 +10,20 @@ const {
     validationResult
 } = require('express-validator');
 
-router.post('/signUp', async (req, res) => {
+router.post('/signUp',[
+    check('email','Không được để trống').not().isEmpty(),
+    check('name','Không được để trống').not().isEmpty(),
+    check('email','Sai định dạng email').isEmail(),
+    check('password','Không được để trống').not().isEmpty(),
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array(),
+            status: 201
+        });
+    }
+
     try {
         let {
             email,
