@@ -18,10 +18,10 @@ router.post('/signUp',[
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(422).json({
+        return (res.json({
             errors: errors.array(),
             status: 201
-        });
+        }));
     }
 
     try {
@@ -83,10 +83,10 @@ router.post('/signIn',[
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(422).json({
+        return (res.json({
             errors: errors.array(),
             status: 201
-        });
+        }));
     }
 
     try {
