@@ -3,8 +3,11 @@ const config = require('config');
 module.exports = () => {
     try {
         mongoose.set('useCreateIndex', true)
-        mongoose.connect(config.get('URI'), {useNewUrlParser: true , useUnifiedTopology: true},(err) => {
-            if(err) throw console.log(err);
+        mongoose.connect(config.get('URI'), {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        }, (err) => {
+            if (err) throw console.log(err);
             console.log('Mongodb connected');
         });
     } catch (error) {

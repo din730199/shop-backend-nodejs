@@ -15,6 +15,8 @@ router.post('/signUp',[
     check('name','Không được để trống').not().isEmpty(),
     check('email','Sai định dạng email').isEmail(),
     check('password','Không được để trống').not().isEmpty(),
+    check('address','Không được để trống').not().isEmpty(),
+    check('numberphone','Không được để trống').not().isEmpty(),
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -29,6 +31,8 @@ router.post('/signUp',[
             email,
             password,
             name,
+            address,
+            numberphone
         } = req.body;
         console.log(password)
         let salt = await bcrypt.genSaltSync(10);
@@ -38,6 +42,8 @@ router.post('/signUp',[
             email,
             password: hashPass,
             name,
+            address,
+            numberphone
         });
         let check = await user.save()
 
