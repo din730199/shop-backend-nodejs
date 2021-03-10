@@ -378,4 +378,20 @@ router.post('/changePass', auth, async (req, res) => {
   }
 });
 
+router.get('/getAllUser', async (req, res) => {
+  try {
+    res.json({data: await UsersModel.find()});
+  } catch (error) {
+    console.log(error);
+    res.json({
+      errors: [
+        {
+          msg: 'Server errors',
+        },
+      ],
+      status: 205,
+    });
+  }
+});
+
 module.exports = router;
