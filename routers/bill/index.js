@@ -70,7 +70,7 @@ router.get('/getListBillById', auth, async (req, res) => {
 
 router.get('/getAllBill', async (req, res) => {
   try {
-    res.json({data: await BillModel.find()});
+    res.json({data: await BillModel.find().populate('idUser')});
   } catch (error) {
     console.log(error);
     res.json({
