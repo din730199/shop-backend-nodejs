@@ -84,6 +84,31 @@ router.get('/getAllBill', async (req, res) => {
   }
 });
 
+router.get('/getAllBillDetail', async (req, res) => {
+  try {
+    res.json({
+      data: await BillDetailModel.find().populate({
+        path: 'idProduct',
+        populate: {
+          path: 'productType',
+          select: '-_id -__v',
+        },
+        select: '-_id -__v',
+      }),
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      errors: [
+        {
+          msg: 'Server errors',
+        },
+      ],
+      status: 205,
+    });
+  }
+});
+
 router.put('/updateById/:id', async (req, res) => {
   try {
     const data = await BillModel.findByIdAndUpdate(req.params.id, req.body, {
