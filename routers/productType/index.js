@@ -81,6 +81,9 @@ router.get('/getListProductType', async (req, res) => {
 });
 
 router.put('/updateById/:id', async (req, res) => {
+  console.log('====================================');
+  console.log(req.body);
+  console.log('====================================');
   try {
     const data = await ProductType.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
